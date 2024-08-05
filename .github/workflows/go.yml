@@ -27,6 +27,9 @@ jobs:
       uses: actions/setup-go@v3
       with:
         go-version: ${{ matrix.go_version }}
+
+    - name: Install docker compose
+      run: sudo find / -name docker-compose
       
     - name: Build-DB
       run: docker-compose build
