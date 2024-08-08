@@ -1,4 +1,4 @@
-name: Go
+name: Docker
 
 on:
   workflow_call:
@@ -17,3 +17,14 @@ jobs:
       with: 
         username: xclarissa
         password: ${{secrets.PASSWORD_DOCKER_HUB}}
+
+    - name: Build and push Docker images
+      uses: docker/build-push-action@v6.6.1
+      with:
+        # Pasta onde estão os arquivos
+        context: .
+        # Path to the Dockerfile
+        file: ./Dockerfile
+        push: true
+        # List of tags
+        tags: xclarissa/go_ci:${{github.ref_name}}
